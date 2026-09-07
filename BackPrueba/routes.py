@@ -92,8 +92,8 @@ def set_inscripcion():
         return {
             "error": "La edad mínima para realizar el registro es de de 18 años"
         }, 400
-    
-    cliente = Cliente(
+
+    cliente = clienteExistente or Cliente(
         tipo_identificacion_id = datos["tipo_identificacion_id"],
         numero_id = datos["numero_id"],
         nombre = datos["nombre"],
@@ -102,7 +102,8 @@ def set_inscripcion():
         direccion = datos["direccion"],
         ciudad_id = datos["ciudad_id"]
     )
-    db.session.add(cliente)
+    if not clienteExistente:
+        db.session.add(cliente)
     db.session.flush()
     inscripcion = Inscripcion(
         cliente_id = cliente.id,
