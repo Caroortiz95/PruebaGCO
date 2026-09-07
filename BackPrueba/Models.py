@@ -52,7 +52,8 @@ class Departamento(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nombre": self.nombre
+            "nombre": self.nombre,
+            "pais_id": self.pais_id
         }
 
 class Ciudad(db.Model):
@@ -74,7 +75,8 @@ class Ciudad(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "nombre": self.nombre
+            "nombre": self.nombre,
+            "departamento_id": self.departamento_id
         }
 
 class Marca(db.Model):
@@ -124,11 +126,13 @@ class Cliente(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "tipo_identificacion_id": self.tipo_identificacion_id,
             "numero_id": self.numero_id,
             "nombre": self.nombre,
             "apellido": self.apellido,
             "fecha_nacimiento": self.fecha_nacimiento,
-            "direccion": self.direccion
+            "direccion": self.direccion,
+            "ciudad_id": self.ciudad_id
         }
 
 class Inscripcion(db.Model):
@@ -149,6 +153,9 @@ class Inscripcion(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "cliente_id": self.cliente_id,
+            "marca_id": self.marca_id,
+            "fecha_inscripcion": self.fecha_inscripcion
         }
     
 def crear_modelos():

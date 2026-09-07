@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Blueprint
+from flask import jsonify, request, Blueprint
 from Models import TipoID, Pais, Departamento, Ciudad, Marca, Cliente, Inscripcion
 from logging import exception
 from config.database import db
@@ -13,7 +13,7 @@ def get_tipo_id():
         toReturn = [tipo.serialize() for tipo in tipoId]
         return jsonify(toReturn), 200
 
-    except Exception as e:
+    except Exception:
         exception("[SERVER]: Error ->")
         return jsonify({"msg": "Ha ocurrido un error"}), 500
 
@@ -24,40 +24,48 @@ def get_pais():
         toReturn = [pais.serialize() for pais in pais]
         return jsonify(toReturn), 200
 
-    except Exception as e:
+    except Exception:
         exception("[SERVER]: Error ->")
         return jsonify({"msg": "Ha ocurrido un error"}), 500
 
 @bp.route('/api/departamentos', methods=["GET"])
 def get_departamento():
     try:
-        departamentos = Departamento.query.all()
+        consulta = Departamento.query
+        pais_id = request.args.get("pais_id", type=int)
+        if pais_id is not None:
+            consulta = consulta.filter_by(pais_id=pais_id)
+        departamentos = consulta.all()
         toReturn = [departamento.serialize() for departamento in departamentos]
         return jsonify(toReturn), 200
 
-    except Exception as e:
+    except Exception:
         exception("[SERVER]: Error ->")
         return jsonify({"msg": "Ha ocurrido un error"}), 500
 
 @bp.route('/api/ciudades', methods=["GET"])
-def get_pais():
+def get_ciudad():
     try:
-        ciudad = Ciudad.query.all()
-        toReturn = [ciudad.serialize() for ciudad in ciudad]
+        consulta = Ciudad.query
+        departamento_id = request.args.get("departamento_id", type=int)
+        if departamento_id is not None:
+                consulta = consulta.filter_by(departamento_id=departamento_id)
+        ciudades = consulta.all()
+        toReturn = [ciudad.serialize() for ciudad in ciudades]
         return jsonify(toReturn), 200
 
-    except Exception as e:
+    except Exception:
         exception("[SERVER]: Error ->")
         return jsonify({"msg": "Ha ocurrido un error"}), 500
 
 @bp.route('/api/marcas', methods=["GET"])
-def get_pais():
+def get_marca():
     try:
         marca = Marca.query.all()
         toReturn = [marca.serialize() for marca in marca]
         return jsonify(toReturn), 200
 
-    except Exception as e:
+    except Exception:
         exception("[SERVER]: Error ->")
         return jsonify({"msg": "Ha ocurrido un error"}), 500
 
@@ -65,13 +73,13 @@ def get_pais():
 def set_inscripcion():
     datos = request.get_json()
 
-    clienteExistente = Cliente.query.filterBy(numeroId = datos["numero_id"]).first()
+    clienteExistente = Cliente.query.filter_by(numero_id = datos["numero_id"]).first()
     if clienteExistente:
         return {
-            "error": "El cliente ya está registrado"
+            "error": "Este usuario ya se encuentra registrado, por favor registre un usuario diferente"
         }, 409
     
-    fecha_nacimiento = datetime.strptime(datos["fecha-nacimiento"], "%y-%m-%d").date
+    fecha_nacimiento = datetime.strptime(datos["fecha_nacimiento"], "%Y-%m-%d").date()
 
     hoy = date.today()
     edad = hoy.year - fecha_nacimiento.year
@@ -80,7 +88,7 @@ def set_inscripcion():
 
     if edad < 18:
         return {
-            "error": "El cliente debe ser mayor de 18 años"
+            "error": "La edad mínima para realizar el registro es de de 18 años"
         }, 400
     
     cliente = Cliente(
@@ -88,7 +96,7 @@ def set_inscripcion():
         numero_id = datos["numero_id"],
         nombre = datos["nombre"],
         apellido = datos["apellido"],
-        fecha_nacimiento = datos["fecha_nacimiento"],
+        fecha_nacimiento = fecha_nacimiento,
         direccion = datos["direccion"],
         ciudad_id = datos["ciudad_id"]
     )
