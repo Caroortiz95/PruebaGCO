@@ -5,7 +5,7 @@ Esta prueba contiene un formulario de inscripción para un programa de fidelidad
 Docker
 
 ## Ejecución
-`docker compose up --build`  
+``` docker compose up --build ```  
 Abrir el siguiente enlace en el navegador: http://localhost:5173/
 
 ## Tecnologías

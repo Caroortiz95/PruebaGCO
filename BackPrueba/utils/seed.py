@@ -3,8 +3,6 @@ from Models import TipoID, Pais, Departamento, Ciudad, Marca, crear_modelos
 from config.database import db
 
 with app.app_context():
-    import os
-    print(os.getenv("DATABASE_URL", "No existe la variable de entorno"))
     crear_modelos()
 
     cedulaCiudadania = TipoID(nombre = "Cédula de ciudadanía")

@@ -29,7 +29,7 @@ export default function FormularioInscripcion() {
             invalido={errores.tipoIdentificacion}
           />
           <CampoFormulario
-            etiqueta="Número de cédula"
+            etiqueta="Número de documento"
             id="numeroCedula"
             tipo="number"
             valor={form.numeroCedula}

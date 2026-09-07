@@ -103,7 +103,7 @@ class Cliente(db.Model):
             db.ForeignKey("tipos_id.id"),
             nullable=False
         )
-    numero_id = db.Column(db.String(30), unique=True, nullable=False)
+    numero_id = db.Column(db.String(30), nullable=False)
     nombre = db.Column(db.String(100), nullable=False)
     apellido = db.Column(db.String(100), nullable=False)
     fecha_nacimiento = db.Column(db.Date, nullable=False)

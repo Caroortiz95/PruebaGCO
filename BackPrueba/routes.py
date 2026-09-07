@@ -73,11 +73,13 @@ def get_marca():
 def set_inscripcion():
     datos = request.get_json()
 
-    clienteExistente = Cliente.query.filter_by(numero_id = datos["numero_id"]).first()
+    clienteExistente = Cliente.query.filter_by(numero_id = datos["numero_id"], tipo_identificacion_id = datos["tipo_identificacion_id"]).first()
     if clienteExistente:
-        return {
-            "error": "Este usuario ya se encuentra registrado, por favor registre un usuario diferente"
-        }, 409
+        marcasAsociadasCliente = [i.marca_id for i in Inscripcion.query.filter_by(cliente_id = clienteExistente.id).all()]
+        if datos["marca_id"] in marcasAsociadasCliente:
+            return {
+                "error": "Este usuario ya se encuentra registrado para esta marca"
+            }, 409
     
     fecha_nacimiento = datetime.strptime(datos["fecha_nacimiento"], "%Y-%m-%d").date()
 
