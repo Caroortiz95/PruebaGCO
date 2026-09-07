@@ -1,7 +1,6 @@
 from config.database import db
 from datetime import date
 
-
 class TipoID(db.Model):
     __tablename__ = "tipos_id"
     id = db.Column(db.Integer, primary_key=True)
@@ -102,7 +101,7 @@ class Cliente(db.Model):
             db.ForeignKey("tipos_id.id"),
             nullable=False
         )
-    numero_id = db.Column(db.String(30), nullable=False)
+    numero_id = db.Column(db.String(30), unique=True, nullable=False)
     nombre = db.Column(db.String(100), nullable=False)
     apellido = db.Column(db.String(100), nullable=False)
     fecha_nacimiento = db.Column(db.Date, nullable=False)

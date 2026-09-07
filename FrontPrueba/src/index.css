@@ -1,0 +1,49 @@
+:root {
+  --gradientPrimary: radial-gradient(circle at 50% 50%, #28a0af, #005f8d);
+  --bgDark: #1a1a1a;
+  --bgCard: #2d2d2d;
+  --bgInput: #222222;
+  --borderColor: #404040;
+  --borderFocus: #28a0af;
+  --textPrimary: #f0f0f0;
+  --textSecondary: #ece8e8;
+  --textMuted: #808080;
+  --shadowCard: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadowInput: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  --sans: 'Segoe UI', system-ui, Roboto, sans-serif;
+  --heading: 'Segoe UI', system-ui, Roboto, sans-serif;
+
+  font: 16px/1.5 var(--sans);
+  color: var(--textPrimary);
+  background: var(--bgDark);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bgDark);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2 {
+  font-family: var(--heading);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}

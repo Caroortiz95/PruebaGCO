@@ -1,0 +1,175 @@
+.seccionPrincipal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 64px 24px;
+  min-height: 100svh;
+  background: var(--gradientPrimary);
+  background-attachment: fixed;
+}
+
+.tituloPrincipal {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ffffff;
+  text-align: center;
+  max-width: 800px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.descripcionPrincipal {
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+  color: var(--textSecondary);
+  text-align: center;
+  max-width: 640px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.contenedorFormulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 720px;
+  padding: 40px;
+  background: var(--bgCard);
+  border-radius: 16px;
+  box-shadow: var(--shadowCard);
+  border: 1px solid var(--borderColor);
+}
+
+.filaCampos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.grupoFormulario {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.etiquetaCampo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--textPrimary);
+  text-align: left;
+}
+
+.campoInput,
+.campoSelect {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: var(--sans);
+  color: var(--textPrimary);
+  background: var(--bgInput);
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.campoInput::placeholder {
+  color: var(--textMuted);
+}
+
+.campoInput:hover,
+.campoSelect:hover {
+  border-color: #4d4d4d;
+}
+
+.campoInput:focus,
+.campoSelect:focus {
+  border-color: var(--borderFocus);
+  box-shadow: 0 0 0 3px rgba(40, 160, 175, 0.25);
+}
+
+.campoSelect {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b0b0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.campoSelect option {
+  background: var(--bgInput);
+  color: var(--textPrimary);
+}
+
+.botonRegistrar {
+  width: 100%;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--sans);
+  color: #ffffff;
+  background: var(--gradientPrimary);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 4px 16px rgba(0, 95, 141, 0.4);
+}
+
+.botonRegistrar:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 95, 141, 0.55);
+}
+
+.botonRegistrar:active {
+  transform: translateY(0);
+}
+
+.botonRegistrar:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .seccionPrincipal {
+    padding: 40px 16px;
+    gap: 20px;
+  }
+
+  .contenedorFormulario {
+    padding: 28px 20px;
+    gap: 16px;
+  }
+
+  .filaCampos {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccionPrincipal {
+    padding: 28px 12px;
+    gap: 16px;
+  }
+
+  .contenedorFormulario {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .etiquetaCampo {
+    font-size: 13px;
+  }
+
+  .campoInput,
+  .campoSelect {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
